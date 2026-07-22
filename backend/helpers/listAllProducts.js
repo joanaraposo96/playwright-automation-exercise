@@ -1,7 +1,7 @@
-export function listAllProducts(request){
+export async function listAllProducts(request){
     const response = await request.get('/api/productsList');
-
-    const body = response.json();
+    
+    const body = await response.json();
 
     return { response, body };
 };
