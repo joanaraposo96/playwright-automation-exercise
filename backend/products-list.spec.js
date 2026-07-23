@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { listAllProducts } from './helpers/listAllProducts';
+import { postToAllProductsList } from './helpers/postToAllProductsList';
 
 test.describe('Products List', () =>{
 
-  test('API 1: Get All Products List', async ({ request }) => {
+  test('API 1: GET All Products List', async ({ request }) => {
     const { response, body } = await listAllProducts(request);
     const list = [
       'id', 
@@ -23,5 +24,13 @@ test.describe('Products List', () =>{
       });
     });
   });
+
+  test('API 2: POST To All Products List', async ({ request }) => {
+    const { response, body } = await postToAllProductsList(request);
+
+    expect(response.status()).toBe(200);
+    expect(body.responseCode).toBe(405);
+    expect(body.message).toBe('This request method is not supported.');
+  })
 });
 
